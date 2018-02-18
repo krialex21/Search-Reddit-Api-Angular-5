@@ -1,20 +1,55 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<nav class="navbar navbar-dark bg-primary mb-3">
+    <div class="container">
+        <span class="navbar-brand">{{title}}</span>
+    </div>
 
+</nav>
+<div id="search-container" class="container">
+    <div id="search" class="card card-body bg-light mb-2">
+        <h4>Search Reddit</h4>
+        <form id="search-form" #redditForm="ngForm" (ngSubmit)="onSubmit(redditForm)">
+
+            <div class="form-group">
+                <input [(ngModel)]="model.searchInput" name="searchinput" type="text" id="searchinput" class="form-control mb-3" placeholder="Search Term..." required>
+
+            </div>
+            <div class="form-check form-check-inline">
+
+                Sort By:
+                <div class="form-check form-check-inline" *ngFor="let sort of sortOptions">
+
+                    <input class="form-check-input ml-2" [value]="sort" type="radio" name="sortby" [(ngModel)]="SortBy" required>
+
+                    <label class=" form-check-label ">{{sort}}</label>
+                </div>
+
+            </div>
+
+            <h5 class="mt-2 ">Limit: </h5>
+            <div class="form-group">
+                <select name="limit" id="limit" class="form-control" ngModel required>
+          <option *ngFor="let pin of limits" [value]="pin">{{pin}}</option>
+        </select>
+            </div>
+            <button type="submit " id="search-btn " class="btn btn-dark btn-block mt-4 ">Search</button>
+
+
+        </form>
+    </div>
+
+    <div class="card-columns" *ngIf="submitted">
+
+        <div class="card" *ngFor="let fdata of reddit.results">
+            <img src="{{imageUrlCheck(fdata.thumbnail)}}" alt="Card image cap" class="card-img-top">
+            <div class="card-body ">
+                <h5 class="card-title ">{{fdata.title}}</h5>
+                <p class="card-text ">{{truncateSelfText(fdata.selftext, 100)}}</p>
+                <a href="{{fdata.url}} " target="_blank " class="btn btn-primary ">Read more</a>
+
+                <button class="btn">
+                        {{fdata.domain}} <span class="badge badge-danger">{{fdata.subreddit}}</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
