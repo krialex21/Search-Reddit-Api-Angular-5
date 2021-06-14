@@ -10,7 +10,8 @@
         <form id="search-form" #redditForm="ngForm" (ngSubmit)="onSubmit(redditForm)">
 
             <div class="form-group">
-                <input [(ngModel)]="model.searchInput" name="searchinput" type="text" id="searchinput" class="form-control mb-3" placeholder="Search Term..." required>
+                <input [(ngModel)]="model.searchInput" name="searchinput" type="text" id="searchinput"
+                    class="form-control mb-3" placeholder="Search Term..." required>
 
             </div>
             <div class="form-check form-check-inline">
@@ -18,7 +19,8 @@
                 Sort By:
                 <div class="form-check form-check-inline" *ngFor="let sort of sortOptions">
 
-                    <input class="form-check-input ml-2" [value]="sort" type="radio" name="sortby" [(ngModel)]="SortBy" required>
+                    <input class="form-check-input ml-2" [value]="sort" type="radio" name="sortby" [(ngModel)]="SortBy"
+                        required>
 
                     <label class=" form-check-label ">{{sort}}</label>
                 </div>
@@ -28,8 +30,8 @@
             <h5 class="mt-2 ">Limit: </h5>
             <div class="form-group">
                 <select name="limit" id="limit" class="form-control" ngModel required>
-          <option *ngFor="let pin of limits" [value]="pin">{{pin}}</option>
-        </select>
+                    <option *ngFor="let pin of limits" [value]="pin">{{pin}}</option>
+                </select>
             </div>
             <button type="submit " id="search-btn " class="btn btn-dark btn-block mt-4 ">Search</button>
 
@@ -45,9 +47,10 @@
                 <h5 class="card-title ">{{fdata.title}}</h5>
                 <p class="card-text ">{{truncateSelfText(fdata.selftext, 100)}}</p>
                 <a href="{{fdata.url}} " target="_blank " class="btn btn-primary ">Read more</a>
+                <div class="span">Created On: {{dateFormatt(fdata.created) | date:'mediumDate'}}</div>
 
                 <button class="btn">
-                        {{fdata.domain}} <span class="badge badge-danger">{{fdata.subreddit}}</span>
+                    {{fdata.domain}} <span class="badge badge-danger">{{fdata.subreddit}}</span>
                 </button>
             </div>
         </div>

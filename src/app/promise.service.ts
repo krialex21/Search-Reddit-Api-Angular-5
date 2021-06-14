@@ -20,6 +20,7 @@ export class PromiseService {
         .toPromise()
         .then(
           res => {
+            console.log(res)
             console.log(res.data.children);
             this.results = res.data.children.map(content => content.data);
             resolve();

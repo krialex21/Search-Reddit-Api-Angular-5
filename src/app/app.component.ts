@@ -38,8 +38,8 @@ export class AppComponent {
   title = "Reddit API With Angular 4";
   limits = [5, 10, 15, 25, 50, 100];
   model = new RedditCat('Trump', this.sortOptions[1], this.limits[3]);
-  log;
-  logs;
+  // log;
+  // logs;
 
 
   onSubmit(redditForm: NgForm) {
@@ -57,19 +57,23 @@ export class AppComponent {
   }
 
 
-
-  truncateSelfText(str, limit) {
+  /*
+  * method to trancate the string(text) to limited characters
+  */
+  truncateSelfText = (str, limit) => {
     let shortStr = str.indexOf('', limit);
     if (shortStr == -1) return str;
     return str.substring(0, limit);
-
-  }
-
+  };
+  // Find if the post has some images, if not replace with reddit image and default
   imageUrlCheck(imgExist) {
     return (imgExist !== "default" && imgExist !== "self") ?
       imgExist :
       'https://cdn.comparitech.com/wp-content/uploads/2017/08/reddit-1.jpg';
   }
+
+  // TIMESTAMP TO DATE EXPRESSION FUNCTION
+  dateFormatt = (x) => new Date(x * 1000);
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }
